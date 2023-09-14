@@ -1,16 +1,5 @@
 package com.trendyol.bootcamp.spring.ch03.config;
 
-import com.trendyol.bootcamp.spring.ch03.repository.account.AccountRepository;
-import com.trendyol.bootcamp.spring.ch03.repository.account.JdbcAccountRepository;
-import com.trendyol.bootcamp.spring.ch03.repository.restaurant.JdbcRestaurantRepository;
-import com.trendyol.bootcamp.spring.ch03.repository.restaurant.RestaurantRepository;
-import com.trendyol.bootcamp.spring.ch03.repository.reward.JdbcRewardRepository;
-import com.trendyol.bootcamp.spring.ch03.repository.reward.RewardRepository;
-import com.trendyol.bootcamp.spring.ch03.service.RewardNetwork;
-import com.trendyol.bootcamp.spring.ch03.service.RewardNetworkImpl;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-
 import javax.sql.DataSource;
 
 /**
@@ -42,8 +31,8 @@ import javax.sql.DataSource;
  * - As it is the only constructor, @Autowired is optional.
  * <p>
  * TODO-04: Implement each @Bean method to contain the code
- *          needed to instantiate its object and set its
- *          dependencies
+ *          needed to instantiate its object and SET ITS
+ *          DEPENDENCIES
  * - You can create beans from the following implementation classes
  *   - rewardNetwork bean from RewardNetworkImpl class
  *   - accountRepository bean from JdbcAccountRepository class
