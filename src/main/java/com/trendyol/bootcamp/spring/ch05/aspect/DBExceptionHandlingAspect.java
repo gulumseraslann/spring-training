@@ -14,8 +14,7 @@ public class DBExceptionHandlingAspect {
 	private Logger logger = LoggerFactory.getLogger(getClass());
 
 
-	//	TODO-10 (Optional): Use AOP to log an exception.
-	//  (Steps 10, 11 and 12 are optional, skip them if you are short on time, you can do it as homework)
+	//	TODO-10 : Use AOP to log an exception.
 	//
 	//  - Configure this advice method to enable logging of
 	//	  exceptions thrown by Repository class methods.
@@ -26,7 +25,7 @@ public class DBExceptionHandlingAspect {
 		logger.warn(EMAIL_FAILURE_MSG + e + "\n");
 	}
 
-	//	TODO-11 (Optional): Annotate this class as a Spring-managed bean.
+	//	TODO-11 : Annotate this class as a Spring-managed bean.
 	//	- Note that we enabled component scanning in an earlier step.
 
 }
