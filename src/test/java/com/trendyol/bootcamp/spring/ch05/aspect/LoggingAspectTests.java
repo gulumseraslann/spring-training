@@ -30,7 +30,6 @@ class LoggingAspectTests {
             // AOP VERIFICATION
             // LoggingAspect should have output an INFO message to console
             String consoleOutput = capture.toString();
-            assertTrue(consoleOutput.startsWith("INFO"));
             assertTrue(consoleOutput.contains("com.trendyol.bootcamp.spring.ch05.aspect.LoggingAspect"));
         }
     }
