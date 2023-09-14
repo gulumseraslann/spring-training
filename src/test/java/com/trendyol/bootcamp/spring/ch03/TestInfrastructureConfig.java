@@ -1,7 +1,9 @@
 package com.trendyol.bootcamp.spring.ch03;
 
+import com.trendyol.bootcamp.spring.ch03.config.RewardsConfig;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 
 import javax.sql.DataSource;
