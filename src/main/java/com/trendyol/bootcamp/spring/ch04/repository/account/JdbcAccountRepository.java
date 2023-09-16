@@ -4,7 +4,9 @@ import com.trendyol.bootcamp.spring.ch04.domain.Account;
 import com.trendyol.bootcamp.spring.ch04.domain.Beneficiary;
 import com.trendyol.bootcamp.spring.ch04.domain.MonetaryAmount;
 import com.trendyol.bootcamp.spring.ch04.domain.Percentage;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -23,6 +25,7 @@ import java.sql.SQLException;
  *   with @Autowired.
  */
 
+@Repository
 public class JdbcAccountRepository implements AccountRepository {
 
 	private DataSource dataSource;
@@ -32,6 +35,7 @@ public class JdbcAccountRepository implements AccountRepository {
 	 *
 	 * @param dataSource the data source
 	 */
+	@Autowired
 	public void setDataSource(DataSource dataSource) {
 		this.dataSource = dataSource;
 	}
