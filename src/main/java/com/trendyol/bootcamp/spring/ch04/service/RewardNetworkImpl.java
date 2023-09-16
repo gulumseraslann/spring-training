@@ -9,6 +9,8 @@ import com.trendyol.bootcamp.spring.ch04.domain.RewardConfirmation;
 import com.trendyol.bootcamp.spring.ch04.repository.account.AccountRepository;
 import com.trendyol.bootcamp.spring.ch04.repository.restaurant.RestaurantRepository;
 import com.trendyol.bootcamp.spring.ch04.repository.reward.RewardRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  * Rewards an Account for Dining at a Restaurant.
@@ -29,6 +31,7 @@ import com.trendyol.bootcamp.spring.ch04.repository.reward.RewardRepository;
  *   injection or constructor injection.
  */
 
+@Service
 public class RewardNetworkImpl implements RewardNetwork {
 
 	private AccountRepository accountRepository;
@@ -43,7 +46,7 @@ public class RewardNetworkImpl implements RewardNetwork {
 	 * @param restaurantRepository the repository for loading restaurants that determine how much to reward
 	 * @param rewardRepository the repository for recording a record of successful reward transactions
 	 */
-	
+	@Autowired
 	public RewardNetworkImpl(AccountRepository accountRepository, RestaurantRepository restaurantRepository,
 			RewardRepository rewardRepository) {
 		this.accountRepository = accountRepository;
