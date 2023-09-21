@@ -61,20 +61,22 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 		// the total contribution amount should have been split into 2 distributions
 		assertEquals(2, contribution.getDistributions().size());
 
-		// each distribution should be 4.00 (as both have a 50% allocation)
-		assertEquals(MonetaryAmount.valueOf("4.00"), contribution.getDistribution("Annabelle").getAmount());
-		assertEquals(MonetaryAmount.valueOf("4.00"), contribution.getDistribution("Corgan").getAmount());
-		
-		// TODO-06: Run this test. It should pass AND you should see TWO lines of
-		// log output from the LoggingAspect on the console
-		int expectedMatches = 2;
-		checkConsoleOutput(capture, expectedMatches);
-		
-		// TODO-09: Save all your work, and change the expected matches value above from 2 to 4.
-		// Rerun the RewardNetworkTests.  It should pass, and you should now see FOUR lines of
-		// console output from the LoggingAspect.
-	}
-	
+        // each distribution should be 4.00 (as both have a 50% allocation)
+        assertEquals(MonetaryAmount.valueOf("4.00"), contribution.getDistribution("Annabelle").getAmount());
+        assertEquals(MonetaryAmount.valueOf("4.00"), contribution.getDistribution("Corgan").getAmount());
+
+        // TODO-06: Run this test. It should pass AND you should see TWO lines of
+        //  DONE!
+        // log output from the LoggingAspect on the console
+        int expectedMatches = 4;
+        checkConsoleOutput(capture, expectedMatches);
+
+        // TODO-09: Save all your work, and change the expected matches value above from 2 to 4.
+        //  DONE!
+        // Rerun the RewardNetworkTests.  It should pass, and you should now see FOUR lines of
+        // console output from the LoggingAspect.
+    }
+
     /**
      * Not only must the code run, but the LoggingAspect should generate logging
      * output to the console.
@@ -106,14 +108,14 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
                         // AccountRepository.updateBeneficiaries
                         matches++;
                     else if (line.contains("Around") && line.contains("RewardRepository")
-                             && line.contains("updateReward"))
+                            && line.contains("updateReward"))
                         // Around aspect invoked for
                         // RewardRepository.updateReward
                         matches++;
                 }
             }
         }
-        
+
         assertEquals(expectedMatches, matches);
     }
 
