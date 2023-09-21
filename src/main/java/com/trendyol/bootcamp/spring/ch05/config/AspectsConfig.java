@@ -22,7 +22,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 public class AspectsConfig {
 
     @Bean
-    public MonitorFactory monitorFactory() {
+    public MonitorFactory monitorFactory(){
         return new JamonMonitorFactory();
     }
 

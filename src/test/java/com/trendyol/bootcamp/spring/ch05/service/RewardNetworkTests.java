@@ -25,7 +25,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
  * application for use in a test environment.
  */
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = {SystemTestConfig.class})
+@ContextConfiguration(classes={SystemTestConfig.class})
 @EnableAutoConfiguration
 class RewardNetworkTests {
 

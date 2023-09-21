@@ -20,25 +20,25 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = { DbExceptionTestConfig.class })
 @EnableAutoConfiguration
- class DBExceptionHandlingAspectTests {
+class DBExceptionHandlingAspectTests {
 
     @Autowired
     AccountRepository repository;
 
     @Test
     @CaptureSystemOutput
-     void testReportException(CaptureSystemOutput.OutputCapture capture) {
-    	
-    	// The repository.findByCreditCard(..) method below will 
-    	// result in an exception because we are using empty database
-    	// set by DbExceptionTestConfig configuration class
-    	// used by @ContextConfiguration annotation above.
+    void testReportException(CaptureSystemOutput.OutputCapture capture) {
+
+        // The repository.findByCreditCard(..) method below will
+        // result in an exception because we are using empty database
+        // set by DbExceptionTestConfig configuration class
+        // used by @ContextConfiguration annotation above.
         assertThrows(RewardDataAccessException.class, () -> {
             repository.findByCreditCard("1234123412341234");
         });
 
         // TODO-12: Validate our AOP is working.
-        //
+        //  DONE!
         // - An error message should now be logged to the console as a warning
         // - Save all your work and run this test - it should pass with a warning
         //   message on the console AND the console output assertion (below)

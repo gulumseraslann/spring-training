@@ -26,7 +26,7 @@ public class SystemTestConfig {
      * with test data for fast testing
      */
     @Bean
-    public DataSource dataSource() {
+    public DataSource dataSource(){
         return
                 (new EmbeddedDatabaseBuilder())
                         .addScript("classpath:testdb/schema.sql")
