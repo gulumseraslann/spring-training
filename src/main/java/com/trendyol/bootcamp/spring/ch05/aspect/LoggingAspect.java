@@ -17,6 +17,7 @@ import org.slf4j.LoggerFactory;
 //    (It is optional since there is only a single constructor in the class.)
 
 public class LoggingAspect {
+
     public final static String BEFORE = "'Before'";
     public final static String AROUND = "'Around'";
 
