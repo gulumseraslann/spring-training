@@ -67,7 +67,7 @@ public class LoggingAspect {
 			//  - Be sure to return the target method's return value to the caller
 			//    and delete the line below.
 
-			return new String("Delete this line after completing TODO-08");
+			return repositoryMethod.proceed();
 
 		} finally {
 			monitor.stop();
