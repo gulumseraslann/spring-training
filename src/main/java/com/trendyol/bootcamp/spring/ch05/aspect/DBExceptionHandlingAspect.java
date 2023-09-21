@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 
 @Aspect
+@Component
 public class DBExceptionHandlingAspect {
 	
 	public static final String EMAIL_FAILURE_MSG = "Failed sending an email to Mister Smith : ";
