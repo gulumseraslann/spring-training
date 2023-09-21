@@ -27,54 +27,56 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes={SystemTestConfig.class})
 @EnableAutoConfiguration
- class RewardNetworkTests {
+class RewardNetworkTests {
 
-	/**
-	 * The object being tested.
-	 */
-	@Autowired
-	private RewardNetwork rewardNetwork;
+    /**
+     * The object being tested.
+     */
+    @Autowired
+    private RewardNetwork rewardNetwork;
 
-	@Test
-	@CaptureSystemOutput
-	 void testRewardForDining(CaptureSystemOutput.OutputCapture capture) {
-		// create a new dining of 100.00 charged to credit card '1234123412341234' by merchant '123457890' as test input
-		Dining dining = Dining.createDining("100.00", "1234123412341234", "1234567890");
+    @Test
+    @CaptureSystemOutput
+    void testRewardForDining(CaptureSystemOutput.OutputCapture capture) {
+        // create a new dining of 100.00 charged to credit card '1234123412341234' by merchant '123457890' as test input
+        Dining dining = Dining.createDining("100.00", "1234123412341234", "1234567890");
 
-		// call the 'rewardNetwork' to test its rewardAccountFor(Dining) method
-		RewardConfirmation confirmation = rewardNetwork.rewardAccountFor(dining);
+        // call the 'rewardNetwork' to test its rewardAccountFor(Dining) method
+        RewardConfirmation confirmation = rewardNetwork.rewardAccountFor(dining);
 
-		// assert the expected reward confirmation results
-		assertNotNull(confirmation);
-		assertNotNull(confirmation.getConfirmationNumber());
+        // assert the expected reward confirmation results
+        assertNotNull(confirmation);
+        assertNotNull(confirmation.getConfirmationNumber());
 
-		// assert an account contribution was made
-		AccountContribution contribution = confirmation.getAccountContribution();
-		assertNotNull(contribution);
+        // assert an account contribution was made
+        AccountContribution contribution = confirmation.getAccountContribution();
+        assertNotNull(contribution);
 
-		// the contribution account number should be '123456789'
-		assertEquals("123456789", contribution.getAccountNumber());
+        // the contribution account number should be '123456789'
+        assertEquals("123456789", contribution.getAccountNumber());
 
-		// the total contribution amount should be 8.00 (8% of 100.00)
-		assertEquals(MonetaryAmount.valueOf("8.00"), contribution.getAmount());
+        // the total contribution amount should be 8.00 (8% of 100.00)
+        assertEquals(MonetaryAmount.valueOf("8.00"), contribution.getAmount());
 
-		// the total contribution amount should have been split into 2 distributions
-		assertEquals(2, contribution.getDistributions().size());
+        // the total contribution amount should have been split into 2 distributions
+        assertEquals(2, contribution.getDistributions().size());
 
-		// each distribution should be 4.00 (as both have a 50% allocation)
-		assertEquals(MonetaryAmount.valueOf("4.00"), contribution.getDistribution("Annabelle").getAmount());
-		assertEquals(MonetaryAmount.valueOf("4.00"), contribution.getDistribution("Corgan").getAmount());
-		
-		// TODO-06: Run this test. It should pass AND you should see TWO lines of
-		// log output from the LoggingAspect on the console
-		int expectedMatches = 2;
-		checkConsoleOutput(capture, expectedMatches);
-		
-		// TODO-09: Save all your work, and change the expected matches value above from 2 to 4.
-		// Rerun the RewardNetworkTests.  It should pass, and you should now see FOUR lines of
-		// console output from the LoggingAspect.
-	}
-	
+        // each distribution should be 4.00 (as both have a 50% allocation)
+        assertEquals(MonetaryAmount.valueOf("4.00"), contribution.getDistribution("Annabelle").getAmount());
+        assertEquals(MonetaryAmount.valueOf("4.00"), contribution.getDistribution("Corgan").getAmount());
+
+        // TODO-06: Run this test. It should pass AND you should see TWO lines of
+        //  DONE!
+        // log output from the LoggingAspect on the console
+        int expectedMatches = 4;
+        checkConsoleOutput(capture, expectedMatches);
+
+        // TODO-09: Save all your work, and change the expected matches value above from 2 to 4.
+        //  DONE!
+        // Rerun the RewardNetworkTests.  It should pass, and you should now see FOUR lines of
+        // console output from the LoggingAspect.
+    }
+
     /**
      * Not only must the code run, but the LoggingAspect should generate logging
      * output to the console.
@@ -83,12 +85,12 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
         // Don't run these checks until we are ready
         if (!TestConstants.CHECK_CONSOLE_OUTPUT)
             return;
-        
+
         // AOP VERIFICATION
         // Expecting 4 lines of output from the LoggingAspect to console
         String[] consoleOutput = capture.toString().split("\n");
         int matches = 0;
-        
+
         for (String line : consoleOutput) {
             if (line.contains("com.trendyol.bootcamp.spring.ch05.aspect.LoggingAspect")) {
                 if (line.contains(LoggingAspect.BEFORE)) {
@@ -106,14 +108,14 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
                         // AccountRepository.updateBeneficiaries
                         matches++;
                     else if (line.contains("Around") && line.contains("RewardRepository")
-                             && line.contains("updateReward"))
+                            && line.contains("updateReward"))
                         // Around aspect invoked for
                         // RewardRepository.updateReward
                         matches++;
                 }
             }
         }
-        
+
         assertEquals(expectedMatches, matches);
     }
 
