@@ -25,63 +25,63 @@ import org.springframework.stereotype.Component;
 @Aspect
 @Component
 public class LoggingAspect {
-	public final static String BEFORE = "'Before'";
-	public final static String AROUND = "'Around'";
+    public final static String BEFORE = "'Before'";
+    public final static String AROUND = "'Around'";
 
-	private Logger logger = LoggerFactory.getLogger(getClass());
-	private MonitorFactory monitorFactory;
+    private Logger logger = LoggerFactory.getLogger(getClass());
+    private MonitorFactory monitorFactory;
 
-	@Autowired
-	public LoggingAspect(MonitorFactory monitorFactory) {
-		super();
-		this.monitorFactory = monitorFactory;
-	}
-
-
-	// TODO-03: Write Pointcut Expression
-	// DONE.
-	// - Decide which advice type is most appropriate
-	// - Write a pointcut expression that selects only find* methods on
-	//    our repository classes.
-
-	@Before("execution(* *..*Repository.find*(..))")
-	public void implLogging(JoinPoint joinPoint) {
-		// Do not modify this log message or the test will fail
-		logger.info(BEFORE + " advice implementation - " + joinPoint.getTarget().getClass() + //
-				"; Executing before " + joinPoint.getSignature().getName() + //
-				"() method");
-	}
+    @Autowired
+    public LoggingAspect(MonitorFactory monitorFactory) {
+        super();
+        this.monitorFactory = monitorFactory;
+    }
 
 
-	// TODO-07: Use AOP to time update...() methods.
-	// Done!
-	// - Mark this method as an around advice.
-	// - Write a pointcut expression to match on all update* methods
-	//	 on all Repository classes.
-	@Around("execution(* *..*Repository.update*(..))")
-	public Object monitor(ProceedingJoinPoint repositoryMethod) throws Throwable {
-		String name = createJoinPointTraceName(repositoryMethod);
-		Monitor monitor = monitorFactory.start(name);
-		try {
-			// Invoke repository method ...
+    // TODO-03: Write Pointcut Expression
+    // DONE.
+    // - Decide which advice type is most appropriate
+    // - Write a pointcut expression that selects only find* methods on
+    //    our repository classes.
 
-			//  TODO-08: Add the logic to proceed with the target method invocation.
-			// 	DONE!
-			//  - Be sure to return the target method's return value to the caller
-			//    and delete the line below.
-			return repositoryMethod.proceed();
-		} finally {
-			monitor.stop();
-			// Do not modify this log message or the test will fail
-			logger.info(AROUND + " advice implementation - " + monitor);
-		}
-	}
+    @Before("execution(* *..*Repository.find*(..))")
+    public void implLogging(JoinPoint joinPoint) {
+        // Do not modify this log message or the test will fail
+        logger.info(BEFORE + " advice implementation - " + joinPoint.getTarget().getClass() + //
+                "; Executing before " + joinPoint.getSignature().getName() + //
+                "() method");
+    }
 
-	private String createJoinPointTraceName(JoinPoint joinPoint) {
-		Signature signature = joinPoint.getSignature();
-		StringBuilder sb = new StringBuilder();
-		sb.append(signature.getDeclaringType().getSimpleName());
-		sb.append('.').append(signature.getName());
-		return sb.toString();
-	}
+
+    // TODO-07: Use AOP to time update...() methods.
+    // Done!
+    // - Mark this method as an around advice.
+    // - Write a pointcut expression to match on all update* methods
+    //	 on all Repository classes.
+    @Around("execution(* *..*Repository.update*(..))")
+    public Object monitor(ProceedingJoinPoint repositoryMethod) throws Throwable {
+        String name = createJoinPointTraceName(repositoryMethod);
+        Monitor monitor = monitorFactory.start(name);
+        try {
+            // Invoke repository method ...
+
+            //  TODO-08: Add the logic to proceed with the target method invocation.
+            // 	DONE!
+            //  - Be sure to return the target method's return value to the caller
+            //    and delete the line below.
+            return repositoryMethod.proceed();
+        } finally {
+            monitor.stop();
+            // Do not modify this log message or the test will fail
+            logger.info(AROUND + " advice implementation - " + monitor);
+        }
+    }
+
+    private String createJoinPointTraceName(JoinPoint joinPoint) {
+        Signature signature = joinPoint.getSignature();
+        StringBuilder sb = new StringBuilder();
+        sb.append(signature.getDeclaringType().getSimpleName());
+        sb.append('.').append(signature.getName());
+        return sb.toString();
+    }
 }

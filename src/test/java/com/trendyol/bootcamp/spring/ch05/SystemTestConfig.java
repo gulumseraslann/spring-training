@@ -20,18 +20,18 @@ import javax.sql.DataSource;
 @Import({RewardsConfig.class, AspectsConfig.class})
 public class SystemTestConfig {
 
-	
-	/**
-	 * Creates an in-memory "rewards" database populated 
-	 * with test data for fast testing
-	 */
-	@Bean
-	public DataSource dataSource(){
-		return
-			(new EmbeddedDatabaseBuilder())
-			.addScript("classpath:testdb/schema.sql")
-			.addScript("classpath:testdb/data.sql")
-			.build();
-	}	
-	
+
+    /**
+     * Creates an in-memory "rewards" database populated
+     * with test data for fast testing
+     */
+    @Bean
+    public DataSource dataSource() {
+        return
+                (new EmbeddedDatabaseBuilder())
+                        .addScript("classpath:testdb/schema.sql")
+                        .addScript("classpath:testdb/data.sql")
+                        .build();
+    }
+
 }

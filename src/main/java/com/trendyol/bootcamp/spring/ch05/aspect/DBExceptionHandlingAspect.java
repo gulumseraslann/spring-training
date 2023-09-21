@@ -12,24 +12,24 @@ import org.springframework.stereotype.Component;
 @Component
 public class DBExceptionHandlingAspect {
 
-	public static final String EMAIL_FAILURE_MSG = "Failed sending an email to Mister Smith : ";
+    public static final String EMAIL_FAILURE_MSG = "Failed sending an email to Mister Smith : ";
 
-	private Logger logger = LoggerFactory.getLogger(getClass());
+    private Logger logger = LoggerFactory.getLogger(getClass());
 
 
-	//	TODO-10 : Use AOP to log an exception.
-	//  DONE!
-	//  - Configure this advice method to enable logging of
-	//	  exceptions thrown by Repository class methods.
-	//	- Select the advice type that seems most appropriate.
-	@AfterThrowing(value = "execution(* *..*Repository.*(..))", throwing = "e")
-	public void implExceptionHandling(RewardDataAccessException e) {
-		// Log a failure warning
-		logger.warn(EMAIL_FAILURE_MSG + e + "\n");
-	}
+    //	TODO-10 : Use AOP to log an exception.
+    //  DONE!
+    //  - Configure this advice method to enable logging of
+    //	  exceptions thrown by Repository class methods.
+    //	- Select the advice type that seems most appropriate.
+    @AfterThrowing(value = "execution(* *..*Repository.*(..))", throwing = "e")
+    public void implExceptionHandling(RewardDataAccessException e) {
+        // Log a failure warning
+        logger.warn(EMAIL_FAILURE_MSG + e + "\n");
+    }
 
-	//	TODO-11 : Annotate this class as a Spring-managed bean.
-	// 	DONE!
-	//	- Note that we enabled component scanning in an earlier step.
+    //	TODO-11 : Annotate this class as a Spring-managed bean.
+    // 	DONE!
+    //	- Note that we enabled component scanning in an earlier step.
 
 }
