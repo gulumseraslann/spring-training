@@ -5,6 +5,7 @@ import com.trendyol.bootcamp.spring.ch05.monitor.MonitorFactory;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
+import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.slf4j.Logger;
@@ -55,6 +56,7 @@ public class LoggingAspect {
 	// - Write a pointcut expression to match on all update* methods
 	//	 on all Repository classes.
 
+	@Around("execution(* *..*Repository.update*(..))")
 	public Object monitor(ProceedingJoinPoint repositoryMethod) throws Throwable {
 		String name = createJoinPointTraceName(repositoryMethod);
 		Monitor monitor = monitorFactory.start(name);
