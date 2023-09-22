@@ -8,7 +8,6 @@ import com.trendyol.bootcamp.spring.ch05.domain.AccountContribution;
 import com.trendyol.bootcamp.spring.ch05.domain.Dining;
 import com.trendyol.bootcamp.spring.ch05.domain.MonetaryAmount;
 import com.trendyol.bootcamp.spring.ch05.domain.RewardConfirmation;
-import com.trendyol.bootcamp.spring.ch05.service.RewardNetwork;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,7 +66,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 		
 		// TODO-06: Run this test. It should pass AND you should see TWO lines of
 		// log output from the LoggingAspect on the console
-		int expectedMatches = 2;
+		int expectedMatches = 4;
 		checkConsoleOutput(capture, expectedMatches);
 		
 		// TODO-09: Save all your work, and change the expected matches value above from 2 to 4.
