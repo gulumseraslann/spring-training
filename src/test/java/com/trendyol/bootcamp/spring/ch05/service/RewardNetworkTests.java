@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
@@ -67,7 +68,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 		
 		// TODO-06: Run this test. It should pass AND you should see TWO lines of
 		// log output from the LoggingAspect on the console
-		int expectedMatches = 2;
+		int expectedMatches = 4;
 		checkConsoleOutput(capture, expectedMatches);
 		
 		// TODO-09: Save all your work, and change the expected matches value above from 2 to 4.
