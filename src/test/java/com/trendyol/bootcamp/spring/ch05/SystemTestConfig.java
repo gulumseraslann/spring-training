@@ -1,6 +1,8 @@
 package com.trendyol.bootcamp.spring.ch05;
 
+import com.trendyol.bootcamp.spring.ch05.config.AspectsConfig;
 import com.trendyol.bootcamp.spring.ch05.config.RewardsConfig;
+import org.aspectj.lang.annotation.Aspect;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -15,7 +17,7 @@ import javax.sql.DataSource;
  * and you should see one line of LoggingAspect output in the console.	 
  */
 @Configuration
-@Import({RewardsConfig.class})
+@Import({RewardsConfig.class, AspectsConfig.class})
 public class SystemTestConfig {
 
 	
